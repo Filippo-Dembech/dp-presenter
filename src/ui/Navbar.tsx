@@ -1,8 +1,8 @@
-import Accordion from "../ui/Accordion";
+import Accordion from "../components/Accordion";
 import { useState } from "react";
 import MenuButton from "../ui/MenuButton";
 import { MdOutlineCancel } from "react-icons/md";
-import Backdrop from "./Backdrop";
+import Backdrop from "../components/Backdrop";
 import Logo from "./Logo";
 
 export default function Navbar() {
