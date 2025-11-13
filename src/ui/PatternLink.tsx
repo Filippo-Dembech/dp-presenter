@@ -6,11 +6,12 @@ interface PatternLinkProps {
 
 export default function PatternLink({
     patternName,
+    className,
     ...rest
 }: PatternLinkProps & LinkProps) {
     return (
         <Link
-            className="hover:text-slate-600"
+            className={`transition-all duration-200 hover:text-slate-500 ${className || ""}`}
             {...rest}
         >
             {patternName}
