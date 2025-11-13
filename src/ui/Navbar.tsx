@@ -4,9 +4,15 @@ import MenuButton from "../ui/MenuButton";
 import { MdOutlineCancel } from "react-icons/md";
 import Backdrop from "../components/Backdrop";
 import Logo from "./Logo";
+import PatternLink from "./PatternLink";
 
 export default function Navbar() {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+    function hideNavbar() {
+        setIsNavbarOpen(false);
+    }
+
     return (
         <div>
             <div className="flex relative justify-between py-3 px-4 shadow-sm md:hidden">
@@ -22,7 +28,7 @@ export default function Navbar() {
                     isNavbarOpen ? "translate-y-0" : "-translate-y-200"
                 }`}
             >
-                <Logo className="hidden md:inline-block md:absolute md:left-4 md:top-1/2 md:-translate-y-1/2"/>
+                <Logo className="hidden md:inline-block md:absolute md:left-4 md:top-1/2 md:-translate-y-1/2" />
                 <button
                     onClick={() => setIsNavbarOpen((curr) => !curr)}
                     className="fixed top-4 right-5 text-slate-400 cursor-pointer md:hidden"
@@ -31,37 +37,128 @@ export default function Navbar() {
                 </button>
                 <Accordion>
                     <Accordion.Item header="Creational Patterns">
-                        <ul>
-                            <li>Factory Method</li>
-                            <li>Abstract Factory</li>
-                            <li>Builder</li>
-                            <li>Prototype</li>
-                            <li>Singleton</li>
+                        <ul className="flex flex-col">
+                            <PatternLink
+                                patternName="Factory Method"
+                                to={"/creational-patterns/factory-method"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Abstract Factory"
+                                to={"/creational-patterns/abstract-factory"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Builder"
+                                to={"/creational-patterns/builder"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Prototype"
+                                to={"/creational-patterns/prototype"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Singleton"
+                                to={"/creational-patterns/singleton"}
+                                onClick={hideNavbar}
+                            />
                         </ul>
                     </Accordion.Item>
                     <Accordion.Item header="Structural Patterns">
-                        <ul>
-                            <li>Adapter</li>
-                            <li>Bridge</li>
-                            <li>Composite</li>
-                            <li>Decorator</li>
-                            <li>Facade</li>
-                            <li>Flyweight</li>
-                            <li>Proxy</li>
+                        <ul className="flex flex-col">
+                            <PatternLink
+                                patternName="Adapter"
+                                to={"/structural-patterns/adapter"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Bridge"
+                                to={"/structural-patterns/bridge"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Composite"
+                                to={"/structural-patterns/composite"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Decorator"
+                                to={"/structural-patterns/decorator"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Facade"
+                                to={"/structural-patterns/facade"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Flyweight"
+                                to={"/structural-patterns/flyweight"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Proxy"
+                                to={"/structural-patterns/proxy"}
+                                onClick={hideNavbar}
+                            />
                         </ul>
                     </Accordion.Item>
+
                     <Accordion.Item header="Behavioral Patterns">
-                        <ul>
-                            <li>Chain of Responsibility</li>
-                            <li>Command</li>
-                            <li>Iterator</li>
-                            <li>Mediator</li>
-                            <li>Memento</li>
-                            <li>Observer</li>
-                            <li>State</li>
-                            <li>Strategy</li>
-                            <li>Template Method</li>
-                            <li>Visitor</li>
+                        <ul className="flex flex-col">
+                            <PatternLink
+                                patternName="Chain of Responsibility"
+                                to={
+                                    "/behavioral-patterns/chain-of-responsibility"
+                                }
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Command"
+                                to={"/behavioral-patterns/command"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Iterator"
+                                to={"/behavioral-patterns/iterator"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Mediator"
+                                to={"/behavioral-patterns/mediator"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Memento"
+                                to={"/behavioral-patterns/memento"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Observer"
+                                to={"/behavioral-patterns/observer"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="State"
+                                to={"/behavioral-patterns/state"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Strategy"
+                                to={"/behavioral-patterns/strategy"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Template Method"
+                                to={"/behavioral-patterns/template-method"}
+                                onClick={hideNavbar}
+                            />
+                            <PatternLink
+                                patternName="Visitor"
+                                to={"/behavioral-patterns/visitor"}
+                                onClick={hideNavbar}
+                            />
                         </ul>
                     </Accordion.Item>
                 </Accordion>
