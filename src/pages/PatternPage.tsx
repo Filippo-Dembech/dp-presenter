@@ -3,6 +3,7 @@ import { patterns } from "../patterns";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { CodeBlock } from "react-code-block";
 import "react-tabs/style/react-tabs.css";
+import { useState } from "react";
 
 function capitalize(str?: string) {
     if (!str) return "";
@@ -20,11 +21,26 @@ export default function PatternPage() {
         ...new Set(patternData?.elements.map((element) => element.role)),
     ];
 
+    const [currentId, setCurrentId] = useState<string | undefined>(undefined);
+
+    function scrollTo(elementId: string) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+
+        const offset = window.pageYOffset - 100
+        const y = el.getBoundingClientRect().top + offset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+    }
+
     return (
         <div>
-            <h1 className="text-3xl font-bold md:text-5xl mb-8">
+            <h1 className="text-3xl font-bold md:text-5xl">
                 {capitalize(patternName)} Pattern
             </h1>
+            <p className="my-8">
+                <strong>Click on the code</strong> element to be redirected to
+                its source code.
+            </p>
             <div className="flex flex-col gap-6 text-xs sm:text-sm md:text-lg">
                 {roles.reverse().map((role) => (
                     <section>
@@ -33,30 +49,61 @@ export default function PatternPage() {
                             <TabList>
                                 {patternData?.elements
                                     .filter((element) => element.role === role)
-                                    .map((element) => (
-                                        <Tab>
-                                            <code>
+                                    .map((element, i) => (
+                                        <Tab
+                                            key={`${element.fileName}-${i}`}
+                                            style={
+                                                currentId === element.fileName
+                                                    ? {
+                                                          fontWeight: "bold",
+                                                          backgroundColor:
+                                                              "lightcoral",
+                                                      }
+                                                    : {}
+                                            }
+                                        >
+                                            <code id={element.fileName}>
                                                 {element.fileName + `.ts`}
                                             </code>
                                         </Tab>
                                     ))}
                             </TabList>
-                        {patternData?.elements
-                            .filter((element) => element.role === role)
-                            .map((element) => (
-                                <TabPanel>
-                                    <CodeBlock
-                                        code={element.code}
-                                        language="ts"
-                                    >
-                                        <CodeBlock.Code className="bg-black p-8 overflow-auto rounded-xl">
-                                            <CodeBlock.LineContent>
-                                                <CodeBlock.Token />
-                                            </CodeBlock.LineContent>
-                                        </CodeBlock.Code>
-                                    </CodeBlock>
-                                </TabPanel>
-                            ))}
+                            {patternData?.elements
+                                .filter((element) => element.role === role)
+                                .map((element, i) => (
+                                    <TabPanel key={`${element.code}-${i}`}>
+                                        <CodeBlock
+                                            code={element.code}
+                                            language="ts"
+                                        >
+                                            <CodeBlock.Code className="bg-black p-8 overflow-auto rounded-xl">
+                                                <CodeBlock.LineContent>
+                                                    <CodeBlock.Token>
+                                                        {({ children }) => (
+                                                            <span
+                                                                className="cursor-pointer inline-block transition-all duration-300 hover:text-red-500 hover:-rotate-2 hover:-skew-x-4"
+                                                                onClick={() => {
+                                                                    scrollTo(
+                                                                        (
+                                                                            children as string
+                                                                        ).trim()
+                                                                    );
+                                                                    setCurrentId(
+                                                                        (
+                                                                            children as string
+                                                                        ).trim()
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {children}
+                                                            </span>
+                                                        )}
+                                                    </CodeBlock.Token>
+                                                </CodeBlock.LineContent>
+                                            </CodeBlock.Code>
+                                        </CodeBlock>
+                                    </TabPanel>
+                                ))}
                         </Tabs>
                     </section>
                 ))}

@@ -44,7 +44,7 @@ export const patterns: Pattern[] = [
             },
             {
                 role: "Creator", 
-                fileName: "Notification Factory",
+                fileName: "NotificationFactory",
                 isInterface: true,
                 code: `abstract class NotificationFactory {
   abstract createNotification(): Notification;
