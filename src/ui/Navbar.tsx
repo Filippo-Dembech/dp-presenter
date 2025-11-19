@@ -24,7 +24,7 @@ export default function Navbar() {
                 onClick={() => setIsNavbarOpen((curr) => !curr)}
             />
             <nav
-                className={`fixed left-0 right-0 top-0 pt-8 pb-4 px-3 rounded-b-2xl shadow-sm transition-transform duration-400 bg-white md:flex md:justify-center md:translate-0 md:static md:rounded-none md:p-2 ${
+                className={`z-20 fixed left-0 right-0 top-0 pt-8 pb-4 px-3 rounded-b-2xl shadow-sm transition-transform duration-400 bg-white md:flex md:justify-center md:translate-0 md:static md:rounded-none md:p-2 ${
                     isNavbarOpen ? "translate-y-0" : "-translate-y-200"
                 }`}
             >

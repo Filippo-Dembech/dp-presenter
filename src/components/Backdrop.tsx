@@ -6,7 +6,7 @@ interface BackdropProps {
 export default function Backdrop({ isOpen, onClick }: BackdropProps) {
     return (
             <div
-                className={`absolute inset-0 bg-black transition-all duration-400 ${
+                className={`absolute inset-0 bg-black transition-all duration-400 z-10 ${
                     isOpen
                         ? "opacity-30 pointer-events-auto"
                         : "opacity-0 pointer-events-none"
