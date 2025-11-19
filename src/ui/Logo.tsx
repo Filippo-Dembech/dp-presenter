@@ -9,7 +9,7 @@ export default function Logo({ className }: LogoProps) {
         <Link to={"/"}>
             <img
                 className={`w-30 cursor-pointer ${className}`}
-                src="./logo.png"
+                src="/logo.png"
                 alt="logo"
             />
         </Link>
