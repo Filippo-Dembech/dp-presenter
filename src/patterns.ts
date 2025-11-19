@@ -1,4 +1,4 @@
-interface PatternElement {
+export interface PatternElement {
     role: string;
     fileName: string;
     code: string;
@@ -260,3 +260,22 @@ factories.forEach(f => f.render());`,
         ],
     },
 ];
+
+
+export function getElementsByRole(elements: PatternElement[], role: string) {
+
+  function normalize(str: string) {
+    return str.toLowerCase().split(" ").join("-")
+  }
+
+  return elements.filter(element => normalize(element.role) === normalize(role));
+}
+
+export function getRoles(elements?: PatternElement[]) {
+  if (!elements) return []
+  return [...new Set(elements.map((element) => element.role))]
+}
+
+export function findElementByFilename(elements: PatternElement[], filename: string) {
+  return elements?.find(element => element.fileName === filename);
+}
