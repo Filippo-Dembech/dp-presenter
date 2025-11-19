@@ -15,7 +15,12 @@ import SelectableTab from "../ui/SelectableTab";
 
 function capitalize(str?: string) {
     if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    return str
+        .split(" ")
+        .map(
+            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ");
 }
 
 export default function PatternExamplePage() {
@@ -64,7 +69,7 @@ export default function PatternExamplePage() {
                     - in the top-left corner are abstract classes or interfaces.
                 </p>
             </div>
-            <div className="flex flex-col gap-6 text-xs sm:text-sm md:text-lg">
+            <div className="flex flex-col gap-6 text-xs sm:text-sm">
                 {roles.reverse().map((role) => (
                     <SelectableSection
                         isSelected={getElementsByRole(

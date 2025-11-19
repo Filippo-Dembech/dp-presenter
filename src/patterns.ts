@@ -277,9 +277,7 @@ factories.forEach(f => f.render());`,
                         role: "Concrete Product",
                         fileName: "MySQLQueryBuilder",
                         isInterface: false,
-                        code: `import { QueryBuilder } from "./QueryBuilder";
-
-export class MySQLQueryBuilder implements QueryBuilder {
+                        code: `export class MySQLQueryBuilder implements QueryBuilder {
   constructor(private config: { host: string; user: string }) {}
 
   select(table: string) {
@@ -304,9 +302,7 @@ export class MySQLQueryBuilder implements QueryBuilder {
                         role: "Concrete Product",
                         fileName: "PostgresQueryBuilder",
                         isInterface: false,
-                        code: `import { QueryBuilder } from "./QueryBuilder";
-
-export class PostgresQueryBuilder implements QueryBuilder {
+                        code: `export class PostgresQueryBuilder implements QueryBuilder {
   constructor(private config: { ssl: boolean }) {}
 
   select(table: string) {
@@ -331,9 +327,7 @@ export class PostgresQueryBuilder implements QueryBuilder {
                         role: "Concrete Product",
                         fileName: "SQLiteQueryBuilder",
                         isInterface: false,
-                        code: `import { QueryBuilder } from "./QueryBuilder";
-
-export class SQLiteQueryBuilder implements QueryBuilder {
+                        code: `export class SQLiteQueryBuilder implements QueryBuilder {
   select(table: string) {
     return \`SELECT * FROM \${table};\`;
   }
@@ -356,9 +350,7 @@ export class SQLiteQueryBuilder implements QueryBuilder {
                         role: "Creator",
                         fileName: "QueryBuilderFactory",
                         isInterface: true,
-                        code: `import { QueryBuilder } from "./QueryBuilder";
-
-export abstract class QueryBuilderFactory {
+                        code: `export abstract class QueryBuilderFactory {
   abstract create(): QueryBuilder;
 
   buildSelect(table: string) {
@@ -378,10 +370,7 @@ export abstract class QueryBuilderFactory {
                         role: "Concrete Creator",
                         fileName: "MySQLFactory",
                         isInterface: false,
-                        code: `import { QueryBuilderFactory } from "./QueryBuilderFactory";
-import { MySQLQueryBuilder } from "./MySQLQueryBuilder";
-
-export class MySQLFactory extends QueryBuilderFactory {
+                        code: `class MySQLFactory extends QueryBuilderFactory {
   constructor(private config: { host: string; user: string }) {
     super();
   }
@@ -396,10 +385,7 @@ export class MySQLFactory extends QueryBuilderFactory {
                         role: "Concrete Creator",
                         fileName: "PostgresFactory",
                         isInterface: false,
-                        code: `import { QueryBuilderFactory } from "./QueryBuilderFactory";
-import { PostgresQueryBuilder } from "./PostgresQueryBuilder";
-
-export class PostgresFactory extends QueryBuilderFactory {
+                        code: `export class PostgresFactory extends QueryBuilderFactory {
   constructor(private config: { ssl: boolean }) {
     super();
   }
@@ -413,10 +399,7 @@ export class PostgresFactory extends QueryBuilderFactory {
                         role: "Concrete Creator",
                         fileName: "SQLiteFactory",
                         isInterface: false,
-                        code: `import { QueryBuilderFactory } from "./QueryBuilderFactory";
-import { SQLiteQueryBuilder } from "./SQLiteQueryBuilder";
-
-export class SQLiteFactory extends QueryBuilderFactory {
+                        code: `export class SQLiteFactory extends QueryBuilderFactory {
   create() {
     return new SQLiteQueryBuilder();
   }
@@ -426,12 +409,7 @@ export class SQLiteFactory extends QueryBuilderFactory {
                         role: "Usage",
                         fileName: "main",
                         isInterface: false,
-                        code: `import { QueryBuilderFactory } from "./QueryBuilderFactory";
-import { MySQLFactory } from "./MySQLFactory";
-import { PostgresFactory } from "./PostgresFactory";
-import { SQLiteFactory } from "./SQLiteFactory";
-
-const factories: QueryBuilderFactory[] = [
+                        code: `const factories: QueryBuilderFactory[] = [
   new MySQLFactory({ host: "localhost", user: "root" }),
   new PostgresFactory({ ssl: true }),
   new SQLiteFactory()
@@ -463,9 +441,7 @@ factories.forEach(f => {
                         role: "Concrete Product",
                         fileName: "JsonParser",
                         isInterface: false,
-                        code: `import { FileParser } from "./FileParser";
-
-export class JsonParser implements FileParser {
+                        code: `export class JsonParser implements FileParser {
   parse(content: string) {
     return JSON.parse(content);
   }
@@ -475,9 +451,7 @@ export class JsonParser implements FileParser {
                         role: "Concrete Product",
                         fileName: "XmlParser",
                         isInterface: false,
-                        code: `import { FileParser } from "./FileParser";
-
-export class XmlParser implements FileParser {
+                        code: `export class XmlParser implements FileParser {
   parse(content: string) {
     // example of simple fake XML parsing
     return { xml: content };
@@ -488,9 +462,7 @@ export class XmlParser implements FileParser {
                         role: "Concrete Product",
                         fileName: "CsvParser",
                         isInterface: false,
-                        code: `import { FileParser } from "./FileParser";
-
-export class CsvParser implements FileParser {
+                        code: `export class CsvParser implements FileParser {
   parse(content: string) {
     return content.split("\\n").map(line => line.split(","));
   }
@@ -499,10 +471,8 @@ export class CsvParser implements FileParser {
                     {
                         role: "Creator",
                         fileName: "FileParserFactory",
-                        isInterface: false,
-                        code: `import { FileParser } from "./FileParser";
-
-export abstract class FileParserFactory {
+                        isInterface: true,
+                        code: `export abstract class FileParserFactory {
   abstract create(): FileParser;
 
   loadAndParse(content: string) {
@@ -515,10 +485,7 @@ export abstract class FileParserFactory {
                         role: "Concrete Creator",
                         fileName: "JsonParserFactory",
                         isInterface: false,
-                        code: `import { FileParserFactory } from "./FileParserFactory";
-import { JsonParser } from "./JsonParser";
-
-export class JsonParserFactory extends FileParserFactory {
+                        code: `export class JsonParserFactory extends FileParserFactory {
   create() {
     return new JsonParser();
   }
@@ -528,10 +495,7 @@ export class JsonParserFactory extends FileParserFactory {
                         role: "Concrete Creator",
                         fileName: "XmlParserFactory",
                         isInterface: false,
-                        code: `import { FileParserFactory } from "./FileParserFactory";
-import { XmlParser } from "./XmlParser";
-
-export class XmlParserFactory extends FileParserFactory {
+                        code: `export class XmlParserFactory extends FileParserFactory {
   create() {
     return new XmlParser();
   }
@@ -541,10 +505,7 @@ export class XmlParserFactory extends FileParserFactory {
                         role: "Concrete Creator",
                         fileName: "CsvParserFactory",
                         isInterface: false,
-                        code: `import { FileParserFactory } from "./FileParserFactory";
-import { CsvParser } from "./CsvParser";
-
-export class CsvParserFactory extends FileParserFactory {
+                        code: `export class CsvParserFactory extends FileParserFactory {
   create() {
     return new CsvParser();
   }

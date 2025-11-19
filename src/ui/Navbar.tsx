@@ -1,5 +1,5 @@
 import Accordion from "../components/Accordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuButton from "../ui/MenuButton";
 import { MdOutlineCancel } from "react-icons/md";
 import Backdrop from "../components/Backdrop";
@@ -13,9 +13,20 @@ export default function Navbar() {
         setIsNavbarOpen(false);
     }
 
+    useEffect(() => {
+        if (isNavbarOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isNavbarOpen]);
+
     return (
         <div>
-            <div className="flex relative justify-between py-3 px-4 shadow-sm md:hidden">
+            <div className="flex justify-between py-3 px-4 shadow-sm md:hidden">
                 <Logo />
                 <MenuButton onClick={() => setIsNavbarOpen((curr) => !curr)} />
             </div>
