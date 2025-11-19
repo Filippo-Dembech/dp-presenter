@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/RootLayout";
 import PatternPage from "./pages/PatternPage";
+import PatternExamplePage from "./pages/PatternExamplePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootLayout />, children: [
@@ -9,6 +10,10 @@ const router = createBrowserRouter([
           {
         path: ":category/:pattern",
         element: <PatternPage />,
+      },
+          {
+        path: ":category/:pattern/:exampleName",
+        element: <PatternExamplePage />,
       },
   ]}
 ])
