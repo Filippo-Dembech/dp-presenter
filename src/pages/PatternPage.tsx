@@ -38,7 +38,7 @@ export default function PatternPage() {
                 {capitalize(patternName)} Pattern
             </h1>
             <p className="my-8">
-                <strong>Click on the code</strong> element to be redirected to
+                <strong>Click on the class/interface name</strong> in the code to be redirected to
                 its source code.
             </p>
             <div className="flex flex-col gap-6 text-xs sm:text-sm md:text-lg">
