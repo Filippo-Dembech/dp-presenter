@@ -43,7 +43,7 @@ export default function PatternPage() {
             </p>
             <div className="flex flex-col gap-6 text-xs sm:text-sm md:text-lg">
                 {roles.reverse().map((role) => (
-                    <section>
+                    <section className={`transform-all duration-400 p-4 ${patternData?.elements.filter((element) => element.role === role).some(element => element.fileName === currentId) ? "shadow-(--shadow-card) p-4 rounded-xl" : "p-4"}`}>
                         <h2 className="text-2xl md:text-4xl mb-3">{role}</h2>
                         <Tabs>
                             <TabList>
@@ -57,7 +57,7 @@ export default function PatternPage() {
                                                     ? {
                                                           fontWeight: "bold",
                                                           backgroundColor:
-                                                              "lightcoral",
+                                                              "powderblue",
                                                       }
                                                     : {}
                                             }
