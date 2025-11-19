@@ -1,10 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/RootLayout";
 import PatternPage from "./pages/PatternPage";
 import PatternExamplePage from "./pages/PatternExamplePage";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <RootLayout />,

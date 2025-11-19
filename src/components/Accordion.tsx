@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import accordionArrow from '/accordion-arrow.svg'
 
 interface AccordionContextType {
     currentHeader?: string;
@@ -71,7 +72,7 @@ function Item({ header, children }: ItemProps) {
             >
                 <span>{header}</span>
                 <img
-                    src="/accordion-arrow.svg"
+                    src={accordionArrow}
                     className={`w-4 transition-transform duration-300 ml-1 ${
                         isCurrent ? "rotate-180" : "rotate-0"
                     }`}
